@@ -21,4 +21,8 @@ object CoroutineRunner: Runner {
             }
         }
     }
+
+    override fun close() {
+        executorService.shutdown()
+    }
 }

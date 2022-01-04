@@ -1,4 +1,7 @@
-data class MeasuredOperation<T>(val result: T, val nanoseconds: Long)
+data class MeasuredOperation<T>(val result: T, val nanoseconds: Long) {
+    val milliseconds: Double
+        get() = nanoseconds.toDouble() / 1000000.0
+}
 
 fun <T> measureTime(block: () -> T): MeasuredOperation<T> {
     val before = System.nanoTime()

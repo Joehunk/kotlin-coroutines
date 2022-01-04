@@ -15,4 +15,7 @@ object ThreadRunner : Runner {
 
         threads.forEach { it.join() }
     }
+
+    override fun close() {
+    }
 }

@@ -1,4 +1,14 @@
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+
 fun main(args: Array<String>) {
+    runBlockingTest()
+
+    CoroutineRunner.close()
+    ThreadRunner.close()
+}
+
+fun simpleCoroutineTest() {
     val unprotectedThreadsResult = measureTime { runTest(ThreadRunner) }
     val protectedThreadsResult = measureTime { runWithProtectedThreads(ThreadRunner) }
     val coroutineResult = measureTime { runTest(CoroutineRunner) }
@@ -8,8 +18,19 @@ fun main(args: Array<String>) {
     printResult("Coroutines", coroutineResult)
 }
 
-fun printResult(operationName: String, result: MeasuredOperation<Int>) {
-    val milliseconds = result.nanoseconds.toDouble() / 1000000.0
+fun runBlockingTest() {
+    val result = measureTime {
+        runBlocking {
+            (1..10).parallelForEach {
+                delay(2000)
+                println("Routine $it done.")
+            }
+        }
+    }
 
-    println("$operationName ran in ${"%.3f".format(milliseconds)} ms and returned ${result.result}")
+    println("Took ${"%.3f".format(result.milliseconds)}ms")
+}
+
+fun <T> printResult(operationName: String, result: MeasuredOperation<T>) {
+    println("$operationName ran in ${"%.3f".format(result.milliseconds)} ms and returned ${result.result}")
 }
