@@ -1,12 +1,12 @@
 package ioabstraction
 
 import arrow.core.NonFatal
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 object BlockingRetry {
-    private val initialDelay = Duration.milliseconds(250)
+    private val initialDelay = 250.milliseconds
 
     fun <T> exponentialBackoffRetry(ioCall: () -> T): T {
         var delay = initialDelay

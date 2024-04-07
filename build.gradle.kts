@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.9.23"
     application
 }
 
@@ -14,9 +14,9 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.0.1")
-    implementation("io.arrow-kt:arrow-fx-stm:1.0.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.1.3")
+    implementation("io.arrow-kt:arrow-fx-stm:1.1.3")
 }
 
 tasks.test {
@@ -24,7 +24,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "17"
 }
 
 application {

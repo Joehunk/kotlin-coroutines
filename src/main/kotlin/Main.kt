@@ -1,5 +1,7 @@
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import java.util.concurrent.Executors
 
 fun main(args: Array<String>) {
     runBlockingTest()
@@ -19,14 +21,16 @@ fun simpleCoroutineTest() {
 }
 
 fun runBlockingTest() {
+    val executor = Executors.newFixedThreadPool(10)
     val result = measureTime {
-        runBlocking {
+        runBlocking(executor.asCoroutineDispatcher()) {
             (1..10).parallelForEach {
-                delay(2000)
+                Thread.sleep(2000)
                 println("Routine $it done.")
             }
         }
     }
+    executor.shutdown()
 
     println("Took ${"%.3f".format(result.milliseconds)}ms")
 }
