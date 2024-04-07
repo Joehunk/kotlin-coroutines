@@ -1,6 +1,7 @@
 import kotlinx.coroutines.runBlocking
+import java.io.Closeable
 
-object ThreadRunner : Runner {
+object ThreadRunner : Runner, Closeable {
     override fun runInParallel(parallelism: Int, iterations: Int, block: () -> Unit) {
         val threads = (1..parallelism).map {
             val thread = Thread {

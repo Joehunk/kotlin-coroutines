@@ -15,8 +15,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.1.3")
-    implementation("io.arrow-kt:arrow-fx-stm:1.1.3")
+    implementation("io.arrow-kt:arrow-core:1.2.1")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.1")
 }
 
 tasks.test {

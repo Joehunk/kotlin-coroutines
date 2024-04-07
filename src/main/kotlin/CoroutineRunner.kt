@@ -1,8 +1,9 @@
 import java.util.concurrent.Executors
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.runBlocking
+import java.io.Closeable
 
-object CoroutineRunner: Runner {
+object CoroutineRunner: Runner, Closeable {
     private val executorService = Executors.newSingleThreadExecutor()
     private val dispatcher = executorService.asCoroutineDispatcher()
 
